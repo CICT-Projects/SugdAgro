@@ -1,0 +1,6 @@
+@SugdAgro_HostAddress = http://localhost:5225
+
+GET {{SugdAgro_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
