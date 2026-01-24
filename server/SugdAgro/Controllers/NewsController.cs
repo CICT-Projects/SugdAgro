@@ -16,4 +16,32 @@ public class NewsController : ControllerBase
     }
 
     // Endpoints будут добавлены в следующих задачах
+    [HttpGet]
+    public async Task<ActionResult> GetAll(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10,
+        [FromQuery] string? lang = null,
+        [FromQuery] int? categoryId = null)
+    {
+        var result = await _newsService.GetAllAsync(page, pageSize, lang, categoryId);
+        return Ok(result);
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<NewsDto>> GetById(int id, [FromQuery] string? lang = null)
+    {
+        var news = await _newsService.GetByIdAsync(id, lang);
+        if (news == null)
+            return NotFound();
+        return Ok(news);
+    }
+
+    [HttpGet("slug/{slug}")]
+    public async Task<ActionResult<NewsDto>> GetBySlug(string slug, [FromQuery] string? lang = null)
+    {
+        var news = await _newsService.GetBySlugAsync(slug, lang);
+        if (news == null)
+            return NotFound();
+        return Ok(news);
+    }
 }
