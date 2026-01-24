@@ -44,4 +44,35 @@ public class NewsController : ControllerBase
             return NotFound();
         return Ok(news);
     }
+    [HttpPost]
+    public async Task<ActionResult<NewsDto>> Create([FromBody] CreateNewsDto dto)
+    {
+        var news = await _newsService.CreateAsync(dto);
+        return CreatedAtAction(nameof(GetById), new { id = news.Id }, news);
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<NewsDto>> Update(int id, [FromBody] UpdateNewsDto dto)
+    {
+        var news = await _newsService.UpdateAsync(id, dto);
+        if (news == null)
+            return NotFound();
+        return Ok(news);
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult> Delete(int id)
+    {
+        var result = await _newsService.DeleteAsync(id);
+        if (!result)
+            return NotFound();
+        return NoContent();
+    }
+
+    [HttpPost("{id:int}/view")]
+    public async Task<ActionResult> IncrementView(int id)
+    {
+        await _newsService.IncrementViewCountAsync(id);
+        return Ok();
+    }
 }
