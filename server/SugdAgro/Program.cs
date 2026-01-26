@@ -54,7 +54,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// 🔴 MUHIM: Authentication avval bo‘lishi shart
 app.UseAuthentication();
 app.UseAuthorization();
 
