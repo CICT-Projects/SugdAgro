@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SugdAgro.API.Models;
 using SugdAgro.Models; 
 
 namespace SugdAgro.Data
@@ -11,5 +12,6 @@ namespace SugdAgro.Data
         }
 
         public DbSet<News> News { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

@@ -48,7 +48,7 @@ namespace SugdAgro.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("News");
+                    b.ToTable("News", (string)null);
                 });
 #pragma warning restore 612, 618
         }
